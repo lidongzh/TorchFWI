@@ -68,6 +68,14 @@ class FWI(torch.nn.Module):
         self.nPad = opt['nPad']
 
         self.Bounds = {}
+        Vp_pad, Vs_pad, Den_pad = ft.padding(Vp, Vs, Den,\
+            self.nz_orig, self.nx_orig, self.nz, self.nx, self.nPml, self.nPad)
+        Vp_ref = Vp_pad.clone().detach()
+        Vs_ref = Vs_pad.clone().detach()
+        Den_ref = Den_pad.clone().detach()
+        self.register_buffer('Vp_ref', Vp_ref)
+        self.register_buffer('Vs_ref', Vs_ref)
+        self.register_buffer('Den_ref', Den_ref)
         if Vp.requires_grad:
             self.Vp = nn.Parameter(Vp)
             if Vp_bounds != None:
@@ -99,12 +107,9 @@ class FWI(torch.nn.Module):
     def forward(self, Shot_ids, ngpu=1):
         Vp_pad, Vs_pad, Den_pad = ft.padding(self.Vp, self.Vs, self.Den,\
             self.nz_orig, self.nx_orig, self.nz, self.nx, self.nPml, self.nPad)
-        Vp_ref = Vp_pad.clone().detach()
-        Vs_ref = Vs_pad.clone().detach()
-        Den_ref = Den_pad.clone().detach()
-        Vp_mask_pad = self.Mask * Vp_pad + (1.0 - self.Mask) * Vp_ref
-        Vs_mask_pad = self.Mask * Vs_pad + (1.0 - self.Mask) * Vs_ref
-        Den_mask_pad = self.Mask * Den_pad + (1.0 - self.Mask) * Den_ref
+        Vp_mask_pad = self.Mask * Vp_pad + (1.0 - self.Mask) * self.Vp_ref
+        Vs_mask_pad = self.Mask * Vs_pad + (1.0 - self.Mask) * self.Vs_ref
+        Den_mask_pad = self.Mask * Den_pad + (1.0 - self.Mask) * self.Den_ref
         Lambda = (Vp_mask_pad**2 - 2.0 * Vs_mask_pad**2) * Den_mask_pad / 1e6
         Mu = Vs_mask_pad**2 * Den_mask_pad / 1e6
         return FWIFunction.apply(Lambda, Mu, Den_mask_pad, self.Stf, ngpu, Shot_ids, self.para_fname)
