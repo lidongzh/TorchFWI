@@ -2,14 +2,16 @@ import torch
 import torch.nn as nn
 import numpy as np 
 from torch.utils.cpp_extension import load
-path = '../Ops/FWI/Src'
 import matplotlib.pyplot as plt
 import os
 from scipy import optimize
 import fwi_utils as ft
 from collections import OrderedDict
 
+abs_path = os.path.dirname(os.path.abspath(__file__))
+path = os.path.join(abs_path, 'Src')
 os.makedirs(path+'/build/', exist_ok=True)
+
 def load_fwi(path):
     fwi = load(name="fwi",
             sources=[path+'/Torch_Fwi.cpp', path+'/Parameter.cpp', path+'/libCUFD.cu', path+'/el_stress.cu', path+'/el_velocity.cu', path+'/el_stress_adj.cu', path+'/el_velocity_adj.cu', path+'/Model.cu', path+'/Cpml.cu', path+'/utilities.cu',	path+'/Src_Rec.cu', path+'/Boundary.cu'],
