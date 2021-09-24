@@ -106,8 +106,8 @@ def sourceGene(f, nStep, delta_t):
 #  Dongzhuo Li @ Stanford
 #  May, 2015
 
-  e = np.pi * np.pi * f * f;
-  t_delay = 1.2/f;
+  e = np.pi * np.pi * f * f
+  t_delay = 1.2/f
   source = np.zeros((nStep))
   for it in range(0,nStep):
       source[it] = (1-2*e*(delta_t*(it)-t_delay)**2)*np.exp(-e*(delta_t*(it)-t_delay)**2)
@@ -117,7 +117,7 @@ def sourceGene(f, nStep, delta_t):
   for it in range(1,nStep):
       source[it] = source[it] + source[it-1]
 
-  source = source * delta_t;
+  source = source * delta_t
 
   return source
   
