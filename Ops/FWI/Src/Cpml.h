@@ -11,6 +11,8 @@ class Cpml {
  public:
 
 	Cpml(Parameter &para, Model &model);
+	Cpml(const Cpml&) = delete;
+	Cpml& operator=(const Cpml&) = delete;
 
 	~Cpml();
 

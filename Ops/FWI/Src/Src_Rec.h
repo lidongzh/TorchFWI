@@ -39,6 +39,8 @@ class Src_Rec {
   Src_Rec(Parameter &para, std::string survey_fname);
   Src_Rec(Parameter &para, std::string survey_fname, const float *stf,
           int nShots, const int *shot_ids);
+  Src_Rec(const Src_Rec&) = delete;
+  Src_Rec& operator=(const Src_Rec&) = delete;
   ~Src_Rec();
 };
 

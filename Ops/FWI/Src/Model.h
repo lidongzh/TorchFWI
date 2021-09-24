@@ -18,6 +18,8 @@ class Model {
   Model(const Parameter &para);
   Model(const Parameter &para, const float *Cp_, const float *Cs_,
         const float *Den_);
+  Model(const Model&) = delete;
+  Model& operator=(const Model&) = delete;
   ~Model();
 
   float *h_Cp;

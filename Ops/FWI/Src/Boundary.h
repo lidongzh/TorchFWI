@@ -15,6 +15,8 @@ class Bnd {
   float *d_Bnd_vz, *d_Bnd_vx, *d_Bnd_szz, *d_Bnd_sxz, *d_Bnd_sxx;
 
   Bnd(const Parameter &para);
+  Bnd(const Bnd&) = delete;
+  Bnd& operator=(const Bnd&) = delete;
 
   ~Bnd();
 
