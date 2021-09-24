@@ -81,11 +81,12 @@ Shot_ids = torch.tensor(np.arange(0,48), dtype=torch.int32)
 
 if (generate_data == True):
   cp_true_pad = np.fromfile('../Mar_models/Model_Cp_true.bin', dtype='float32', count=-1)
-  cp_true_pad = np.reshape(cp_true_pad, (nz_pad, -1), order='F')
+  cp_true_pad = np.ascontiguousarray(np.reshape(cp_true_pad, (nz_pad, -1), order='F'))
   cs_true_pad = np.zeros((nz_pad, nx_pad))
-  # plt.imshow(cp_true_pad, cmap='RdBu_r');plt.colorbar()
-  # plt.colorbar()
-  # plt.show()
+  print(f'cp_true_pad shape = {cp_true_pad.shape}')
+  plt.imshow(cp_true_pad, cmap='RdBu_r')
+  plt.colorbar()
+  plt.show()
   den_true_pad = 2500.0 * np.ones((nz_pad, nx_pad))
   th_cp_pad = torch.tensor(cp_true_pad, dtype=torch.float32, requires_grad=False)
   th_cs_pad = torch.tensor(cs_true_pad, dtype=torch.float32, requires_grad=False)
@@ -105,7 +106,7 @@ opt['nPml'] = nPml
 opt['nPad'] = nPad
 opt['para_fname'] = para_fname
 cp_init_pad = np.fromfile('../Mar_models/Model_Cp_init_1D.bin', dtype='float32', count=-1)
-cp_init_pad = np.reshape(cp_init_pad, (nz_pad, -1), order='F')
+cp_init_pad = np.ascontiguousarray(np.reshape(cp_init_pad, (nz_pad, -1), order='F'))
 # plt.imshow(cp_init_pad, cmap='RdBu_r');
 # plt.colorbar()
 # plt.show()
