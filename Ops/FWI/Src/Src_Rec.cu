@@ -64,8 +64,8 @@ Src_Rec::Src_Rec(Parameter &para, string survey_fname, const float *stf, int gro
 	float *d_win_start, *d_win_end;
 	float *d_weights;
 
-	dim3 threads(TX,TY);
-	dim3 blocks((para.nz()+TX-1)/TX, (para.nx()+TY-1)/TY);
+	// dim3 threads(TX,TY);
+	// dim3 blocks((para.nz()+TX-1)/TX, (para.nx()+TY-1)/TY);
 
 	if_res_ = para.if_res();
 	if_win_ = para.if_win();

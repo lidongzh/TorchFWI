@@ -102,8 +102,8 @@ extern "C" void cufd(float *misfit, float *grad_Lambda, float *grad_Mu,
 
   dim3 threads(TX, TY);
   dim3 blocks((nz + TX - 1) / TX, (nx + TY - 1) / TY);
-  dim3 threads2(TX + 4, TY + 4);
-  dim3 blocks2((nz + TX + 3) / (TX + 4), (nx + TY + 3) / (TY + 4));
+  // dim3 threads2(TX + 4, TY + 4);
+  // dim3 blocks2((nz + TX + 3) / (TX + 4), (nx + TY + 3) / (TY + 4));
 
   float *d_vz, *d_vx, *d_szz, *d_sxx, *d_sxz, *d_vz_adj, *d_vx_adj, *d_szz_adj,
       *d_sxx_adj, *d_sxz_adj;

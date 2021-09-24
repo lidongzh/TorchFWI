@@ -60,7 +60,7 @@ std::vector<torch::Tensor> fwi_backward(const torch::Tensor &th_Lambda,
   auto th_grad_Lambda_sum = torch::zeros_like(th_Lambda);
   auto th_grad_Mu_sum = torch::zeros_like(th_Mu);
   auto th_grad_Den_sum = torch::zeros_like(th_Den);
-  auto th_misfit_sum = torch::zeros(1);
+  float misfit_sum = 0.0;
 
 #pragma omp parallel for num_threads(ngpu)
   for (int i = 0; i < ngpu; i++) {
@@ -86,14 +86,13 @@ std::vector<torch::Tensor> fwi_backward(const torch::Tensor &th_Lambda,
     // torch::Tensor th_misfit = torch::from_blob(&misfit, {1});
     vec_misfit.at(i) = misfit;
   }
-  float misfit_sum = 0.0;
   for (int i = 0; i < ngpu; i++) {
     th_grad_Lambda_sum += vec_grad_Lambda.at(i);
     th_grad_Mu_sum += vec_grad_Mu.at(i);
     th_grad_Den_sum += vec_grad_Den.at(i);
     misfit_sum += vec_misfit.at(i);
   }
-  return {torch::from_blob(&misfit_sum, {1}), th_grad_Lambda_sum, th_grad_Mu_sum,
+  return {torch::tensor({misfit_sum}), th_grad_Lambda_sum, th_grad_Mu_sum,
           th_grad_Den_sum, vec_grad_stf.at(0)};
 }
 
