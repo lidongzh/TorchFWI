@@ -64,7 +64,7 @@ std::vector<torch::Tensor> fwi_backward(const torch::Tensor &th_Lambda,
 
 #pragma omp parallel for num_threads(ngpu)
   for (int i = 0; i < ngpu; i++) {
-    // float *misfit_ptr = NULL;
+    // float *misfit_ptr = nullptr;
     // misfit_ptr = (float *)malloc(sizeof(float));
     float misfit = 0.0;
     auto th_grad_Lambda = torch::zeros_like(th_Lambda);
@@ -119,7 +119,7 @@ void fwi_obscalc(const torch::Tensor &th_Lambda, const torch::Tensor &th_Mu,
     auto shot_ids = th_sub_shot_ids.data_ptr<int>();
     cufd(nullptr, nullptr, nullptr, nullptr, nullptr, Lambda, Mu, Den, stf, 2, i,
          th_sub_shot_ids.size(0), shot_ids, para_fname);
-    //     cufd(NULL, NULL, NULL, NULL, NULL, Lambda, Mu, Den, stf, 2, gpu_id,
+    //     cufd(nullptr, nullptr, nullptr, nullptr, nullptr, Lambda, Mu, Den, stf, 2, gpu_id,
     //          group_size, shot_ids, para_fname);
   }
 }

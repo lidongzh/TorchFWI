@@ -110,7 +110,7 @@ extern "C" void cufd(float *misfit, float *grad_Lambda, float *grad_Mu,
   float *d_mem_dvz_dz, *d_mem_dvz_dx, *d_mem_dvx_dz, *d_mem_dvx_dx;
   float *d_mem_dszz_dz, *d_mem_dsxx_dx, *d_mem_dsxz_dz, *d_mem_dsxz_dx;
   float *d_l2Obj_temp;
-  float *h_l2Obj_temp = NULL;
+  float *h_l2Obj_temp = nullptr;
   h_l2Obj_temp = (float *)malloc(sizeof(float));
   float h_l2Obj = 0.0;
   float *d_gauss_amp;

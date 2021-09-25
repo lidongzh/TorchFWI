@@ -9,7 +9,7 @@
 
 void fileBinLoad(float *h_bin, int size, std::string fname) {
   FILE *fp = fopen(fname.c_str(), "rb");
-  if (fp == NULL) {
+  if (fp == nullptr) {
     std::cout << "Attempted to read " << fname << std::endl;
     printf("File reading error!\n");
     exit(1);
@@ -21,7 +21,7 @@ void fileBinLoad(float *h_bin, int size, std::string fname) {
 
 void fileBinWrite(float *h_bin, int size, std::string fname) {
   FILE *fp = fopen(fname.c_str(), "wb");
-  if (fp == NULL) {
+  if (fp == nullptr) {
     printf("File writing error!\n");
     exit(1);
   } else {
@@ -32,7 +32,7 @@ void fileBinWrite(float *h_bin, int size, std::string fname) {
 
 void fileBinWriteDouble(double *h_bin, int size, std::string fname) {
   FILE *fp = fopen(fname.c_str(), "wb");
-  if (fp == NULL) {
+  if (fp == nullptr) {
     printf("File writing error!\n");
     exit(1);
   } else {
@@ -1190,7 +1190,7 @@ void source_update_adj(int nSteps, float dt, int nrec, float *d_data,
 }
 
 float amp_ratio_comp(int n, float *d_data_obs, float *d_data_cal) {
-  float *obs_maxval = NULL, *cal_maxval = NULL;
+  float *obs_maxval = nullptr, *cal_maxval = nullptr;
   float *d_obs_maxval, *d_cal_maxval;
 
   obs_maxval = (float *)malloc(sizeof(float));

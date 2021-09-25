@@ -37,24 +37,24 @@ Src_Rec::Src_Rec(Parameter &para, string survey_fname, const float *stf, int gro
 	assert(json_src_rec.IsObject());
 
 	// int nsrc = 0; // for multiple sources per shot (future)
-	// int *h_z_src = NULL;
-	// int *h_x_src = NULL;
+	// int *h_z_src = nullptr;
+	// int *h_x_src = nullptr;
 	int nrec = 0;
 	int z_src = 10;
 	int x_src = 10;
 	int nSteps = para.nSteps();
 	int nPml = para.nPoints_pml();
 	float dt = para.dt();
-	int *h_z_rec = NULL;
-	int *h_x_rec = NULL;
-	float *h_win_start = NULL; // for selected window
-	float *h_win_end = NULL; // for selected window
-	float *h_weights = NULL; // for trace weighting
-	float *h_source = NULL;
-	float *h_data = NULL;
-	float *h_data_obs = NULL;
-	float *h_res = NULL;
-	double *h_rec_rxz = NULL; // for rec sxx/szz ratio
+	int *h_z_rec = nullptr;
+	int *h_x_rec = nullptr;
+	float *h_win_start = nullptr; // for selected window
+	float *h_win_end = nullptr; // for selected window
+	float *h_weights = nullptr; // for trace weighting
+	float *h_source = nullptr;
+	float *h_data = nullptr;
+	float *h_data_obs = nullptr;
+	float *h_res = nullptr;
+	double *h_rec_rxz = nullptr; // for rec sxx/szz ratio
 	char thisShot[10]; // for shot number small than 99999
 	int *d_z_rec, *d_x_rec;
 	// float *d_data;
