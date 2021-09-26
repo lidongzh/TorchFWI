@@ -1,5 +1,5 @@
 # TorchFWI
-TorchFWI is an elastic full-waveform inversion (FWI) package integrated with the deep-learning framework PyTorch. On the one hand, it enables integration of FWI with neural networks and makes it easy to create complicated inversion workflow. On the other hand, the multi-GPU-accelerated FWI component with a boundary-saving method offers high computational efficiency. One can either use the suite of built-in optimizers in PyTorch or Scipy (e.g. L-BFGS-B) for inversion.
+TorchFWI is an elastic full-waveform inversion (FWI) package integrated with the deep-learning framework PyTorch. On the one hand, it enables the integration of FWI with neural networks and makes it easy to create complex inversion workflows. On the other hand, the multi-GPU-accelerated FWI component with a boundary-saving method offers high computational efficiency. One can use the suite of built-in optimizers in PyTorch or Scipy (e.g., L-BFGS-B) for inversion.
 
 As a quick start, go to directory *src*, and type
 ```
@@ -15,7 +15,7 @@ python main.py --ngpu=4
 ```
 The initial model and the inverted model after 80 iterations are shown below.
 <img src="Mar_models/Inversion.jpg" style="zoom:67%;" />
-This package uses just-in-time (JIT) compilation for the FWI code. It only compiles the first time you run the code, and no explicit ''make'' is required. A NVIDIA cuda compiler is needed.
+This package uses just-in-time (JIT) compilation for the FWI code. It only compiles the first time you run the code, and no explicit ''make'' is required. An NVIDIA cuda compiler is needed.
 
 If you find this package helpful in your research, please kindly cite
 1. **Dongzhuo Li**, **Kailai Xu**, Jerry M. Harris, and Eric Darve. [*Time-lapse Full-waveform Inversion for Subsurface Flow Problems with Intelligent Automatic Diﬀerentiation*](https://arxiv.org/abs/1912.07552).
